@@ -14,9 +14,8 @@
   },
   "dependencies": {
     "@lqmanh/boracium": "^1.0.0",
-    "mobx": "^5.15.4",
-    "mobx-react-lite": "^1.5.2",
-    "next": "^9.3.0",
+    "mobx-react": "^6.1.8",
+    "next": "^9.3.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
