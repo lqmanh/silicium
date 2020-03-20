@@ -1,5 +1,30 @@
 @import 'tailwindcss/base';
 
+h1 {
+  @apply text-3xl;
+  @apply tracking-wide;
+}
+h2 {
+  @apply text-2xl;
+  @apply tracking-wide;
+}
+h3 {
+  @apply text-xl;
+  @apply tracking-wide;
+}
+h4 {
+  @apply text-lg;
+  @apply tracking-wide;
+}
+h5 {
+  @apply text-base;
+  @apply tracking-wide;
+}
+h6 {
+  @apply text-sm;
+  @apply tracking-wide;
+}
+
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
