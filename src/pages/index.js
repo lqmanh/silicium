@@ -1,5 +1,10 @@
-import Layout from '../components/layouts/layout'
+import { Layout, SideBar } from '../components/layouts'
+import { MibBrowser } from '../components/divisions/mib-browser'
 
-const Index = () => <Layout left="Side bar">Hello world!</Layout>
+const Index = () => (
+  <Layout left={<SideBar />}>
+    <MibBrowser />
+  </Layout>
+)
 
 export default Index
