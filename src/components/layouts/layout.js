@@ -1,9 +1,13 @@
+import SideBar from './side-bar'
+
 const Layout = (props) => {
-  const { left, children } = props
+  const { children } = props
 
   return (
     <div className="flex items-stretch h-screen">
-      <aside className="hidden sm:block">{left}</aside>
+      <aside className="hidden sm:block">
+        <SideBar />
+      </aside>
       <article className="flex-grow">{children}</article>
     </div>
   )
