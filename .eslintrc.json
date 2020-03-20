@@ -5,6 +5,8 @@
     "jest": true,
     "node": true
   },
+  "extends": ["prettier", "prettier/react"],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "impliedStrict": true,
@@ -12,7 +14,6 @@
     },
     "sourceType": "module"
   },
-  "extends": ["prettier", "prettier/react"],
   "plugins": ["prettier", "react", "react-hooks"],
   "rules": {
     "react/prop-types": "off",
