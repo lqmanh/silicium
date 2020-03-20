@@ -1,3 +1,5 @@
-const Index = () => <h1 className="font-bold text-3xl text-red-500">Hello world!</h1>
+import Layout from '../components/layouts/layout'
+
+const Index = () => <Layout left="Side bar">Hello world!</Layout>
 
 export default Index
