@@ -1,6 +1,10 @@
+import { DivisionTitle } from '../../typography/titles'
+import RequestForm from './form'
+
 const RequestDivision = () => (
   <section>
-    <h5 className="text-gray-800">REQUEST</h5>
+    <DivisionTitle>request</DivisionTitle>
+    <RequestForm />
   </section>
 )
 

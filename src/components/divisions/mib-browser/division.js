@@ -1,6 +1,8 @@
+import { DivisionTitle } from '../../typography/titles'
+
 const MibBrowserDivision = () => (
   <section>
-    <h5 className="text-gray-800">MIB BROWSER</h5>
+    <DivisionTitle>mib browser</DivisionTitle>
   </section>
 )
 
