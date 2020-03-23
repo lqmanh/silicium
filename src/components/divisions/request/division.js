@@ -34,12 +34,12 @@ const RequestDivision = () => {
           <Input type="number" placeholder="Port" defaultValue="161" />
         </div>
         <div className="flex -mx-2 mb-4">
-          <Select width="w-1/4" options={versions} value="v2c" />
+          <Select width="w-1/4" options={versions} defaultValue="v2c" />
           <Input width="w-full" placeholder="Community" defaultValue="public" />
         </div>
         <div className="flex -mx-2">
           <Input width="w-full" placeholder="Object identifier" />
-          <Select width="w-1/4" options={methods} value="GET" />
+          <Select width="w-1/4" options={methods} defaultValue="GET" />
           <Button bgColor="bg-blue-600">
             <IconText icon={<Icon name="send-outline" />} text="Send" />
           </Button>
