@@ -9,6 +9,7 @@ const SideBar = () => {
       </p>
 
       <Entry href="/" iconName="home-outline" />
+      <Entry href="/favorites" iconName="star-outline" />
       <Entry href="/history" iconName="time-outline" />
       <Entry href="/generator" iconName="construct-outline" />
     </nav>

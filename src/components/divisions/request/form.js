@@ -27,16 +27,16 @@ const RequestForm = () => {
         </span>
         <span className="">
           <Button
-            bgColor="bg-transparent hover:bg-red-600"
-            textColor="text-red-600 hover:text-white"
+            bgColor="bg-transparent hover:bg-gray-800"
+            textColor="text-gray-800 hover:text-white"
           >
-            Reset to default
+            Load
           </Button>
           <Button
             bgColor="bg-transparent hover:bg-gray-800"
             textColor="text-gray-800 hover:text-white"
           >
-            Save as default
+            Save
           </Button>
         </span>
       </div>
