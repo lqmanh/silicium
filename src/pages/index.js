@@ -4,14 +4,14 @@ import { ResponseDivision } from '../components/divisions/response'
 
 const Index = () => (
   <div className="grid grid-cols-3 h-full">
-    <div className="col-span-1 border-r border-gray-400 p-4">
+    <div className="col-span-1 border-r border-gray-400 px-6 py-4">
       <MibBrowserDivision />
     </div>
     <div className="col-span-2 flex flex-col">
-      <div className="border-b border-gray-400 p-4">
+      <div className="border-b border-gray-400 px-6 py-4">
         <RequestDivision />
       </div>
-      <div className="p-4">
+      <div className="px-6 py-4">
         <ResponseDivision />
       </div>
     </div>
