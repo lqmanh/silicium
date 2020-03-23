@@ -1,5 +1,3 @@
-import { Layout } from '../components/layouts'
-
-const Generator = () => <Layout></Layout>
+const Generator = () => null
 
 export default Generator

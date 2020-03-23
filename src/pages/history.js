@@ -1,5 +1,3 @@
-import { Layout } from '../components/layouts'
-
-const History = () => <Layout></Layout>
+const History = () => null
 
 export default History
