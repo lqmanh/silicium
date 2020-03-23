@@ -1,4 +1,4 @@
-import { DivisionTitle } from '../../typography/titles'
+import { DivisionTitle } from '../../common/typography/titles'
 import RequestForm from './form'
 
 const RequestDivision = () => (
