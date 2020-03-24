@@ -4,9 +4,9 @@ import { DivisionTitle } from '../../common/typography/titles'
 
 const RequestDivision = () => {
   const versions = [
-    { value: 'v1', text: 'Version 1' },
-    { value: 'v2c', text: 'Version 2c' },
-    { value: 'v3', text: 'Version 3' },
+    { value: 'v1', text: 'SNMP v1' },
+    { value: 'v2c', text: 'SNMP v2c' },
+    { value: 'v3', text: 'SNMP v3' },
   ]
   const methods = [{ value: 'GET' }, { value: 'GETNEXT' }]
 

@@ -22,7 +22,7 @@ const Input = (props) => {
   const bgColor = 'bg-gray-200 focus:bg-white'
   const borderColor = 'border-gray-200 focus:border-gray-600'
   const textColor = 'text-gray-800 focus:text-black'
-  const className = `border rounded shadow-inner ${width} ${bgColor} ${borderColor} ${textColor} mx-2 px-4 py-2`
+  const className = `appearance-none outline-none border rounded shadow-inner ${width} ${bgColor} ${borderColor} ${textColor} mx-2 px-4 py-2`
 
   return (
     <input
@@ -41,7 +41,7 @@ const Select = (props) => {
   const bgColor = 'bg-gray-200 focus:bg-white'
   const borderColor = 'border-gray-200 focus:border-gray-600'
   const textColor = 'text-gray-800 focus:text-black'
-  const className = `appearance-none border rounded shadow-inner w-full ${bgColor} ${borderColor} ${textColor} px-4 py-2 pr-8`
+  const className = `appearance-none outline-none border rounded shadow-inner w-full ${bgColor} ${borderColor} ${textColor} px-4 py-2 pr-8`
 
   return (
     <span className={`inline-block relative ${width} mx-2`}>
