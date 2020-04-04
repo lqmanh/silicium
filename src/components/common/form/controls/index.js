@@ -1,17 +1,12 @@
 import { Icon } from '../../elements'
 
 const Button = (props) => {
-  const {
-    bgColor = 'bg-gray-800',
-    borderColor = '',
-    textColor = 'text-gray-200 hover:text-white',
-    onClick,
-    children,
-  } = props
-  const className = `rounded ${bgColor} ${borderColor} ${textColor} mx-2 px-4 py-2`
+  const { bgColor = 'bg-gray-800', textColor = 'text-gray-200 hover:text-white', onClick, children } = props
+  const border = 'rounded'
+  const space = 'mx-2 px-4 py-2'
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={`${bgColor} ${border} ${textColor} ${space}`} onClick={onClick}>
       {children}
     </button>
   )
@@ -20,13 +15,14 @@ const Button = (props) => {
 const Input = (props) => {
   const { width = '', type, placeholder, defaultValue, value, onChange } = props
   const bgColor = 'bg-gray-200 focus:bg-white'
-  const borderColor = 'border-gray-200 focus:border-gray-600'
+  const border = 'rounded border border-gray-200 focus:border-gray-600'
   const textColor = 'text-gray-800 focus:text-black'
-  const className = `appearance-none outline-none border rounded shadow-inner ${width} ${bgColor} ${borderColor} ${textColor} mx-2 px-4 py-2`
+  const shadow = 'shadow-inner'
+  const space = 'mx-2 px-4 py-2'
 
   return (
     <input
-      className={className}
+      className={`appearance-none outline-none ${width} ${bgColor} ${border} ${textColor} ${shadow} ${space}`}
       type={type}
       placeholder={placeholder}
       defaultValue={defaultValue}
@@ -38,14 +34,21 @@ const Input = (props) => {
 
 const Select = (props) => {
   const { width = '', options = [], defaultValue, value, onChange } = props
+  const selectWidth = 'w-full'
   const bgColor = 'bg-gray-200 focus:bg-white'
-  const borderColor = 'border-gray-200 focus:border-gray-600'
+  const border = 'rounded border border-gray-200 focus:border-gray-600'
   const textColor = 'text-gray-800 focus:text-black'
-  const className = `appearance-none outline-none border rounded shadow-inner w-full ${bgColor} ${borderColor} ${textColor} px-4 py-2 pr-8`
+  const shadow = 'shadow-inner'
+  const space = 'px-4 py-2 pr-8'
 
   return (
     <span className={`inline-block relative ${width} mx-2`}>
-      <select className={className} defaultValue={defaultValue} value={value} onChange={onChange}>
+      <select
+        className={`appearance-none outline-none ${selectWidth} ${bgColor} ${border} ${textColor} ${shadow} ${space}`}
+        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
+      >
         {options.map((opt, i) => (
           <option key={i} value={opt.value}>
             {opt.text || opt.value}
