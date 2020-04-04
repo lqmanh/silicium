@@ -3,7 +3,7 @@ const VarbindCard = (props) => {
   const width = 'w-full'
   const bgColor = 'bg-gray-200'
   const border = 'rounded'
-  const textColor = 'text-gray-800'
+  const textColor = 'text-gray-800 hover:text-black'
   const shadow = 'shadow hover:shadow-md'
   const space = 'mx-2 p-4'
 

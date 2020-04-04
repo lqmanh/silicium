@@ -1,12 +1,13 @@
 import { Icon } from '../../elements'
 
 const Button = (props) => {
-  const { bgColor = 'bg-gray-800', textColor = 'text-gray-200 hover:text-white', onClick, children } = props
+  const { bgColor = 'bg-transparent', textColor = 'text-gray-800 hover:text-black', onClick, children } = props
   const border = 'rounded'
+  const shadow = 'shadow hover:shadow-md'
   const space = 'mx-2 px-4 py-2'
 
   return (
-    <button className={`${bgColor} ${border} ${textColor} ${space}`} onClick={onClick}>
+    <button className={`${bgColor} ${border} ${textColor} ${shadow} ${space}`} onClick={onClick}>
       {children}
     </button>
   )
