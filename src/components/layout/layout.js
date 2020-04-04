@@ -4,7 +4,7 @@ const Layout = (props) => {
   const { children } = props
 
   return (
-    <div className="flex items-stretch h-screen">
+    <div className="flex items-stretch bg-white h-screen">
       <aside className="hidden sm:block">
         <SideBar />
       </aside>
