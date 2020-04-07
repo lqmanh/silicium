@@ -21,10 +21,10 @@ const RequestDivision = () => {
             <Button bgColor="bg-transparent hover:bg-red-600" textColor="text-red-600 hover:text-white">
               <IconText icon={<Icon name="trash-outline" />} text="Clear" />
             </Button>
-            <Button bgColor="bg-transparent hover:bg-gray-800" textColor="text-gray-800 hover:text-white">
+            <Button>
               <IconText icon={<Icon name="cloud-upload-outline" />} text="Load" />
             </Button>
-            <Button bgColor="bg-transparent hover:bg-gray-800" textColor="text-gray-800 hover:text-white">
+            <Button>
               <IconText icon={<Icon name="cloud-download-outline" />} text="Save" />
             </Button>
           </span>
@@ -40,7 +40,7 @@ const RequestDivision = () => {
         <div className="flex -mx-2">
           <Input width="w-full" placeholder="Object identifier" />
           <Select width="w-1/4" options={methods} defaultValue="GET" />
-          <Button bgColor="bg-blue-600">
+          <Button bgColor="bg-blue-600" textColor="text-gray-200 hover:text-white">
             <IconText icon={<Icon name="send-outline" />} text="Send" />
           </Button>
         </div>

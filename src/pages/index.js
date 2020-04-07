@@ -7,11 +7,11 @@ const Index = () => (
     <div className="col-span-1 border-r border-gray-400 px-6 py-4">
       <MibBrowserDivision />
     </div>
-    <div className="col-span-2 flex flex-col">
+    <div className="col-span-2 flex flex-col h-screen">
       <div className="border-b border-gray-400 px-6 py-4">
         <RequestDivision />
       </div>
-      <div className="px-6 py-4">
+      <div className="flex-grow overflow-y-auto px-6 py-4">
         <ResponseDivision />
       </div>
     </div>
