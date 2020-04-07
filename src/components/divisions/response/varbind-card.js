@@ -1,14 +1,10 @@
+import { Card } from '../../common/elements'
+
 const VarbindCard = (props) => {
   const { varbind } = props
-  const width = 'w-full'
-  const bgColor = 'bg-gray-200'
-  const border = 'rounded'
-  const textColor = 'text-gray-800 hover:text-black'
-  const shadow = 'shadow hover:shadow-md'
-  const space = 'mx-2 p-4'
 
   return (
-    <div className={`${width} ${bgColor} ${border} ${textColor} ${shadow} ${space}`}>
+    <Card>
       <p>
         <span>Numeric OID: </span>
         <span>{varbind.numericOID ?? ''}</span>
@@ -31,7 +27,7 @@ const VarbindCard = (props) => {
           <span>{varbind.type ?? ''}</span>
         </span>
       </p>
-    </div>
+    </Card>
   )
 }
 

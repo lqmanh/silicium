@@ -1,3 +1,4 @@
+import { Badge } from '../../common/elements'
 import { DivisionTitle } from '../../common/typography/titles'
 import VarbindCard from './varbind-card'
 
@@ -8,7 +9,10 @@ const ResponseDivision = () => {
         <span className="mx-2">
           <DivisionTitle>response</DivisionTitle>
         </span>
-        <span>{/* response status */}</span>
+        <span>
+          <Badge>Hello</Badge>
+          <Badge>World</Badge>
+        </span>
       </div>
       <div className="flex -mx-2 mb-4">
         <VarbindCard varbind={{}} />
