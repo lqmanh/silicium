@@ -18,7 +18,7 @@ const Button = (props) => {
 }
 
 const Input = (props) => {
-  const { width = '', type, placeholder, defaultValue, value, onChange } = props
+  const { width = '', type, name, placeholder, defaultValue, value, onChange } = props
   const style = {
     appearance: 'appearance-none outline-none',
     width,
@@ -33,6 +33,7 @@ const Input = (props) => {
     <input
       className={`${style.appearance} ${style.width} ${style.bg} ${style.border} ${style.text} ${style.shadow} ${style.space}`}
       type={type}
+      name={name}
       placeholder={placeholder}
       defaultValue={defaultValue}
       value={value}
@@ -42,7 +43,7 @@ const Input = (props) => {
 }
 
 const Select = (props) => {
-  const { width = '', options = [], defaultValue, value, onChange } = props
+  const { width = '', name, defaultValue, value, onChange, options = [] } = props
   const style = {
     appearance: 'appearance-none outline-none',
     innerWidth: 'w-full',
@@ -57,6 +58,7 @@ const Select = (props) => {
     <span className={`inline-block relative ${width} mx-2`}>
       <select
         className={`${style.appearance} ${style.innerWidth} ${style.bg} ${style.border} ${style.text} ${style.shadow} ${style.space}`}
+        name={name}
         defaultValue={defaultValue}
         value={value}
         onChange={onChange}

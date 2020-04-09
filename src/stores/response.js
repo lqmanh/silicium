@@ -1,4 +1,4 @@
-import { observable } from 'mobx-react'
+import { observable } from 'mobx'
 
 class ResponseStore {
   @observable statusCode = 0
