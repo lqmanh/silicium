@@ -1,10 +1,10 @@
 import { action, observable } from 'mobx'
 
 class ResponseStore {
-  @observable statusCode = 0
-  @observable statusText = ''
+  @observable statusCode = null
+  @observable statusText = null
   @observable varbinds = []
-  @observable snmpDelay = 0 // ms
+  @observable snmpDelay = null // ms
   @observable timestamp = null
 
   constructor(rootStore) {
@@ -12,14 +12,21 @@ class ResponseStore {
   }
 
   @action
-  updateFromResponse(res) {
+  fromResponse(res) {
     const { status, statusText, data } = res
     this.statusCode = status
     this.statusText = statusText
 
-    if (status !== 200) return
+    if (status !== 200 || !(data instanceof Array)) return
 
     this.varbinds = data.map((varbindData) => new Varbind(varbindData))
+  }
+
+  @action
+  clear() {
+    this.statusCode = null
+    this.statusText = null
+    this.varbinds = []
   }
 }
 

@@ -1,27 +1,28 @@
-import { Badge } from '../../common/elements'
+import { observer } from 'mobx-react'
+import { useStores } from '../../../hooks'
 import { DivisionTitle } from '../../common/typography/titles'
+import StatusBadge from './status-badge'
 import VarbindCard from './varbind-card'
 
-const ResponseDivision = () => {
+const ResponseDivision = observer(() => {
+  const { responseStore: resStore } = useStores()
+  const { statusCode, statusText, varbinds } = resStore
+
   return (
     <section>
       <div className="flex items-center justify-between -mx-2 mb-4">
         <span className="mx-2">
           <DivisionTitle>response</DivisionTitle>
         </span>
-        <span>
-          <Badge>Hello</Badge>
-          <Badge>World</Badge>
-        </span>
+        <span>{statusCode && <StatusBadge statusCode={statusCode} statusText={statusText} />}</span>
       </div>
-      <div className="flex -mx-2 mb-4">
-        <VarbindCard varbind={{}} />
-      </div>
-      <div className="flex -mx-2">
-        <VarbindCard varbind={{}} />
-      </div>
+      {varbinds.map((varbind, i) => (
+        <div className="flex -mx-2 mb-4" key={i}>
+          <VarbindCard varbind={varbind} />
+        </div>
+      ))}
     </section>
   )
-}
+})
 
 export default ResponseDivision

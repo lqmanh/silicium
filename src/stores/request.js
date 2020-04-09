@@ -26,8 +26,10 @@ class RequestStore {
 
   @action
   async submit() {
+    this.rootStore.responseStore.clear()
+
     const res = await this.axios.post('/api/snmp', this.json)
-    this.rootStore.responseStore.updateFromResponse(res)
+    this.rootStore.responseStore.fromResponse(res)
   }
 
   @action
@@ -38,6 +40,8 @@ class RequestStore {
     this.community = ''
     this.oid = ''
     this.method = ''
+
+    this.rootStore.responseStore.clear()
   }
 }
 
