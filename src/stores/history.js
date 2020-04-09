@@ -1,10 +1,10 @@
-import { observable } from 'mobx-react'
+import { observable } from 'mobx'
 
 class HistoryStore {
   @observable entries = []
 
-  constructor() {
-    //
+  constructor(rootStore) {
+    this.rootStore = rootStore
   }
 }
 

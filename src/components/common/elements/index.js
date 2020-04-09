@@ -20,10 +20,10 @@ const IconText = (props) => {
 }
 
 const Badge = (props) => {
-  const { bgColor = 'bg-gray-200', textColor = 'text-gray-800', children } = props
+  const { bgColor = 'bg-gray-200', textColor = 'text-gray-600', children } = props
   const style = {
     bg: bgColor,
-    border: 'rounded',
+    border: 'rounded-full',
     text: textColor,
     space: 'mx-2 px-4 py-2',
   }

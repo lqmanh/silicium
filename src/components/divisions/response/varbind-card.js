@@ -1,6 +1,7 @@
+import { observer } from 'mobx-react'
 import { Card } from '../../common/elements'
 
-const VarbindCard = (props) => {
+const VarbindCard = observer((props) => {
   const { varbind } = props
 
   return (
@@ -29,6 +30,6 @@ const VarbindCard = (props) => {
       </p>
     </Card>
   )
-}
+})
 
 export default VarbindCard

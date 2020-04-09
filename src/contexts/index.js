@@ -1,6 +1,12 @@
 import { createContext } from 'react'
-import { HistoryStore, RequestStore, ResponseStore } from '../stores'
+import { RootStore } from '../stores'
 
-export const historyStoreContext = createContext(new HistoryStore())
-export const requestStoreContext = createContext(new RequestStore())
-export const responseStoreContext = createContext(new ResponseStore())
+const rootStore = new RootStore()
+const { historyStore, requestStore, responseStore } = rootStore
+
+export const storesContext = createContext({
+  rootStore,
+  historyStore,
+  requestStore,
+  responseStore,
+})

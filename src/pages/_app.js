@@ -1,3 +1,4 @@
+import 'mobx-react/batchingForReactDom'
 import '../assets/styles.css'
 import { Layout } from '../components/layout'
 
