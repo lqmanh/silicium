@@ -2,7 +2,7 @@ import { SnmpClient } from '@lqmanh/boracium'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'POST') return res.status(204).json({})
+  if (req.method !== 'POST') return res.status(404).json({})
 
   const { host, port, version, community, oid, method } = req.body
 
@@ -16,5 +16,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   else if (method === 'GETNEXT') varbinds = await client.getNext(oid)
   else if (method === 'GETBULK') varbinds = await client.getBulk(oid)
   else return res.json({ msg: 'SNMP_METHOD_UNKNOWN' })
+
   return res.json(varbinds)
 }
