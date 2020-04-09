@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { host, port, version, community, oid, method } = req.body
 
   // no support for SNMP v3 yet
-  if (version === 'v3') return res.json({ msg: 'SNMP_V3_NOT_SUPPORTED' })
+  if (version === '3') return res.json({ msg: 'SNMP_V3_NOT_SUPPORTED' })
 
   const client = new SnmpClient({ host, port, version, community })
 

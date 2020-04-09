@@ -1,15 +1,16 @@
+import { useContext } from 'react'
 import { Icon, IconText } from '../../common/elements/index'
 import { Button, Input, Select } from '../../common/form/controls'
 import { DivisionTitle } from '../../common/typography/titles'
 
-const RequestDivision = () => {
-  const versions = [
-    { value: 'v1', text: 'SNMP v1' },
-    { value: 'v2c', text: 'SNMP v2c' },
-    { value: 'v3', text: 'SNMP v3' },
-  ]
-  const methods = [{ value: 'GET' }, { value: 'GETNEXT' }]
+const versions = [
+  { value: '1', text: 'SNMP v1' },
+  { value: '2c', text: 'SNMP v2c' },
+  { value: '3', text: 'SNMP v3' },
+]
+const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }]
 
+const RequestDivision = () => {
   return (
     <section>
       <form className="">
