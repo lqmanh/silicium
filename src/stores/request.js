@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { action, computed, observable } from 'mobx'
 
 class RequestStore {
@@ -7,15 +8,26 @@ class RequestStore {
   @observable community = 'public'
   @observable oid = ''
   @observable method = 'GET' // GET or GETNEXT
+  @observable timestamp = null
 
-  constructor() {
-    //
+  constructor(rootStore) {
+    this.rootStore = rootStore
+    this.axios = axios.create({
+      timeout: 10 * 1000,
+      validateStatus: null, // always resolve HTTP response promises
+    })
   }
 
   @computed
   get json() {
     const { host, port, version, community, oid, method } = this
     return { host, port, version, community, oid, method }
+  }
+
+  @action
+  async submit() {
+    const res = await this.axios.post('/api/snmp', this.json)
+    this.rootStore.responseStore.updateFromResponse(res)
   }
 
   @action

@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { action, observable } from 'mobx'
 
 class ResponseStore {
   @observable statusCode = 0
@@ -7,8 +7,19 @@ class ResponseStore {
   @observable snmpDelay = 0 // ms
   @observable timestamp = null
 
-  constructor() {
-    //
+  constructor(rootStore) {
+    this.rootStore = rootStore
+  }
+
+  @action
+  updateFromResponse(res) {
+    const { status, statusText, data } = res
+    this.statusCode = status
+    this.statusText = statusText
+
+    if (status !== 200) return
+
+    this.varbinds = data.map((varbindData) => new Varbind(varbindData))
   }
 }
 
@@ -19,8 +30,13 @@ class Varbind {
   @observable type = ''
   @observable value = ''
 
-  constructor() {
-    //
+  constructor(json) {
+    this.fromJson(json)
+  }
+
+  @action
+  fromJson(json) {
+    Object.assign(this, json)
   }
 }
 

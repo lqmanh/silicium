@@ -1,3 +1,1 @@
-export { default as HistoryStore } from './history'
-export { default as RequestStore } from './request'
-export { default as ResponseStore } from './response'
+export { default as RootStore } from './root'

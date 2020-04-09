@@ -3,8 +3,8 @@ import { observable } from 'mobx'
 class HistoryStore {
   @observable entries = []
 
-  constructor() {
-    //
+  constructor(rootStore) {
+    this.rootStore = rootStore
   }
 }
 

@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react'
-import { useContext } from 'react'
-import { requestStoreContext } from '../../../contexts'
+import { useStores } from '../../../hooks'
 import { Icon, IconText } from '../../common/elements/index'
 import { Button, Input, Select } from '../../common/form/controls'
 import { DivisionTitle } from '../../common/typography/titles'
@@ -13,14 +12,14 @@ const RequestDivision = observer(() => {
   ]
   const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }]
 
-  const reqStore = useContext(requestStoreContext)
+  const { requestStore: reqStore } = useStores()
   const updateField = (event) => {
     const { name, value } = event.target
     reqStore[name] = value
   }
   const submit = (event) => {
     event.preventDefault()
-    console.log(reqStore.json)
+    reqStore.submit()
   }
   const clear = (event) => {
     event.preventDefault()
