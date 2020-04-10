@@ -17,9 +17,10 @@ class ResponseStore {
     this.statusCode = status
     this.statusText = statusText
 
-    if (status !== 200 || !(data instanceof Array)) return
+    if (status !== 200 || !(data.varbinds instanceof Array)) return
 
-    this.varbinds = data.map((varbindData) => new Varbind(varbindData))
+    this.varbinds = data.varbinds.map((varbindData) => new Varbind(varbindData))
+    this.snmpDelay = data.snmpDelay
   }
 
   @action
@@ -27,6 +28,8 @@ class ResponseStore {
     this.statusCode = null
     this.statusText = null
     this.varbinds = []
+    this.snmpDelay = null
+    this.timestamp = null
   }
 }
 
