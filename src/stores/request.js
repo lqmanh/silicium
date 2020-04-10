@@ -20,16 +20,20 @@ class RequestStore {
 
   @computed
   get json() {
-    const { host, port, version, community, oid, method } = this
-    return { host, port, version, community, oid, method }
+    const { host, port, version, community, oid, method, timestamp } = this
+    return { host, port, version, community, oid, method, timestamp }
   }
 
   @action
   async submit() {
     this.rootStore.responseStore.clear()
 
+    this.timestamp = new Date()
     const res = await this.axios.post('/api/snmp', this.json)
+    this.rootStore.responseStore.timestamp = new Date()
+
     this.rootStore.responseStore.fromResponse(res)
+    this.rootStore.historyStore.append(this.json, this.rootStore.responseStore.json)
   }
 
   @action
@@ -40,6 +44,7 @@ class RequestStore {
     this.community = ''
     this.oid = ''
     this.method = ''
+    this.timestamp = null
 
     this.rootStore.responseStore.clear()
   }

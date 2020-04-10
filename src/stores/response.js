@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx'
+import { action, computed, observable } from 'mobx'
 
 class ResponseStore {
   @observable statusCode = null
@@ -11,15 +11,28 @@ class ResponseStore {
     this.rootStore = rootStore
   }
 
+  @computed
+  get json() {
+    const { statusCode, statusText, varbinds, snmpDelay, timestamp } = this
+    return {
+      statusCode,
+      statusText,
+      varbinds: varbinds.map((varbind) => varbind.json),
+      snmpDelay,
+      timestamp,
+    }
+  }
+
   @action
   fromResponse(res) {
     const { status, statusText, data } = res
     this.statusCode = status
     this.statusText = statusText
 
-    if (status !== 200 || !(data instanceof Array)) return
+    if (status !== 200 || !(data.varbinds instanceof Array)) return
 
-    this.varbinds = data.map((varbindData) => new Varbind(varbindData))
+    this.varbinds = data.varbinds.map((varbindData) => new Varbind(varbindData))
+    this.snmpDelay = data.snmpDelay
   }
 
   @action
@@ -27,6 +40,8 @@ class ResponseStore {
     this.statusCode = null
     this.statusText = null
     this.varbinds = []
+    this.snmpDelay = null
+    this.timestamp = null
   }
 }
 
@@ -39,6 +54,12 @@ class Varbind {
 
   constructor(json) {
     this.fromJson(json)
+  }
+
+  @computed
+  get json() {
+    const { numericOID, textualOID, fullOID, type, value } = this
+    return { numericOID, textualOID, fullOID, type, value }
   }
 
   @action
