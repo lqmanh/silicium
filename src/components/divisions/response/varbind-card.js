@@ -1,33 +1,17 @@
 import { observer } from 'mobx-react'
 import { Card } from '../../common/elements'
+import { InputField } from '../../common/form/fields'
 
 const VarbindCard = observer((props) => {
   const { varbind } = props
 
   return (
     <Card>
-      <p>
-        <span>Numeric OID: </span>
-        <span>{varbind.numericOID ?? ''}</span>
-      </p>
-      <p>
-        <span>Textual MIB name: </span>
-        <span>{varbind.textualOID ?? ''}</span>
-      </p>
-      <p>
-        <span>Full OID: </span>
-        <span>{varbind.fullOID ?? ''}</span>
-      </p>
-      <p className="flex">
-        <span className="w-1/2">
-          <span>Value: </span>
-          <span>{varbind.value ?? ''}</span>
-        </span>
-        <span className="w-1/2">
-          <span>Type: </span>
-          <span>{varbind.type ?? ''}</span>
-        </span>
-      </p>
+      <InputField label="Numeric OID" value={varbind.numericOID} />
+      <InputField label="Textual MIB name" value={varbind.textualOID} />
+      <InputField label="Full OID" value={varbind.fullOID} />
+      <InputField label="Type" value={varbind.type} />
+      <InputField label="Value" value={varbind.value} />
     </Card>
   )
 })
