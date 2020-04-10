@@ -6,8 +6,9 @@ import StatusBadge from './status-badge'
 import VarbindCard from './varbind-card'
 
 const ResponseDivision = observer(() => {
-  const { responseStore: resStore } = useStores()
+  const { responseStore: resStore, historyStore } = useStores()
   const { statusCode, statusText, varbinds, snmpDelay } = resStore
+  const { last } = historyStore
 
   return (
     <section>
@@ -16,8 +17,12 @@ const ResponseDivision = observer(() => {
           <DivisionTitle>response</DivisionTitle>
         </span>
         <span>
-          {statusCode && <StatusBadge statusCode={statusCode} statusText={statusText} />}
-          {snmpDelay && <DelayBadge snmpDelay={snmpDelay} httpDelay={0} />}
+          {statusCode && (
+            <>
+              <StatusBadge statusCode={statusCode} statusText={statusText} />
+              {last && <DelayBadge snmpDelay={snmpDelay} httpDelay={last.httpDelay} />}
+            </>
+          )}
         </span>
       </div>
       {varbinds.map((varbind, i) => (

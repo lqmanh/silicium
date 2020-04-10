@@ -6,7 +6,7 @@ const DelayBadge = observer((props) => {
 
   return (
     <Badge bgColor="bg-blue-200" textColor="text-blue-600">
-      <span className="font-bold">{snmpDelay}</span>
+      {snmpDelay ? <span className="font-bold">{snmpDelay}</span> : <span>&ndash;</span>}
       <span>&nbsp;ms</span>
       <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       <span className="font-bold">{httpDelay}</span>
