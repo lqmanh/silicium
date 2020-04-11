@@ -29,7 +29,7 @@ class RequestStore {
     this.rootStore.responseStore.clear()
 
     this.timestamp = new Date()
-    const res = await this.axios.post('/api/snmp', this.json)
+    const res = await this.axios.post('/api/snmp-client', this.json)
     this.rootStore.responseStore.timestamp = new Date()
 
     this.rootStore.responseStore.fromResponse(res)
