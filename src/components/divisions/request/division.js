@@ -12,7 +12,7 @@ const RequestDivision = observer(() => {
   ]
   const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }]
 
-  const { requestStore: reqStore } = useStores()
+  const { requestStore: reqStore, responseStore: resStore } = useStores()
   const updateField = (event) => {
     const { name, value } = event.target
     reqStore[name] = value
@@ -24,6 +24,7 @@ const RequestDivision = observer(() => {
   const clear = (event) => {
     event.preventDefault()
     reqStore.clear()
+    resStore.clear()
   }
 
   return (

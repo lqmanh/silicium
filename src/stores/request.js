@@ -45,8 +45,6 @@ class RequestStore {
     this.oid = ''
     this.method = ''
     this.timestamp = null
-
-    this.rootStore.responseStore.clear()
   }
 }
 

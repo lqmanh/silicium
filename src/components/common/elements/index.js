@@ -22,13 +22,16 @@ const IconText = (props) => {
 const Badge = (props) => {
   const { bgColor = 'bg-gray-200', textColor = 'text-gray-600', children } = props
   const style = {
+    appearance: 'inline-block',
     bg: bgColor,
     border: 'rounded-full',
     text: textColor,
     space: 'mx-2 px-4 py-2',
   }
 
-  return <span className={`${style.bg} ${style.border} ${style.text} ${style.space}`}>{children}</span>
+  return (
+    <span className={`${style.appearance} ${style.bg} ${style.border} ${style.text} ${style.space}`}>{children}</span>
+  )
 }
 
 const Card = (props) => {
