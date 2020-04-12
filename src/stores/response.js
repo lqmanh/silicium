@@ -25,6 +25,8 @@ class ResponseStore {
 
   @action
   fromResponse(res) {
+    this.timestamp = new Date()
+
     const { status, statusText, data } = res
     this.statusCode = status
     this.statusText = statusText

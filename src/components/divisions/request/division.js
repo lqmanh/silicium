@@ -19,7 +19,7 @@ const RequestDivision = observer(() => {
   }
   const submit = (event) => {
     event.preventDefault()
-    reqStore.submit()
+    reqStore.send()
   }
   const clear = (event) => {
     event.preventDefault()
