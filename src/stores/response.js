@@ -13,14 +13,9 @@ class ResponseStore {
 
   @computed
   get json() {
-    const { statusCode, statusText, varbinds, snmpDelay, timestamp } = this
-    return {
-      statusCode,
-      statusText,
-      varbinds: varbinds.map((varbind) => varbind.json),
-      snmpDelay,
-      timestamp,
-    }
+    const { statusCode, statusText, snmpDelay, timestamp } = this
+    const varbinds = this.varbinds.map((varbind) => varbind.json)
+    return { statusCode, statusText, varbinds, snmpDelay, timestamp }
   }
 
   @action

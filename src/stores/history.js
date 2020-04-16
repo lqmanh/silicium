@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { action, computed, observable } from 'mobx'
 
 class HistoryStore {
@@ -5,6 +6,10 @@ class HistoryStore {
 
   constructor(rootStore) {
     this.rootStore = rootStore
+    this.axios = axios.create({
+      timeout: 10 * 1000,
+      validateStatus: null, // always resolve HTTP response promises
+    })
   }
 
   @computed
@@ -15,11 +20,13 @@ class HistoryStore {
   }
 
   @action
-  append(req, res) {
+  async append(reqJson, resJson) {
     const entry = new HistoryEntry()
-    entry.request = req
-    entry.response = res
+    entry.request = reqJson
+    entry.response = resJson
     this.entries.push(entry)
+
+    await this.axios.post('/api/history', { request: reqJson, response: resJson })
   }
 }
 
@@ -29,7 +36,6 @@ class HistoryEntry {
 
   @computed
   get httpDelay() {
-    if (!this.request || !this.response) return null
     return this.response.timestamp - this.request.timestamp
   }
 }

@@ -26,13 +26,8 @@ class RequestStore {
 
   @action
   async send() {
-    const { responseStore: resStore, historyStore } = this.rootStore
-    resStore.clear()
-
     this.timestamp = new Date()
-    const res = await this.axios.post('/api/snmp-client', this.json)
-    resStore.fromResponse(res)
-    historyStore.append(this.json, resStore.json)
+    return this.axios.post('/api/snmp-client', this.json)
   }
 
   @action
