@@ -1,7 +1,7 @@
 import { Icon } from '../../elements'
 
 const Button = (props) => {
-  const { bgColor = 'bg-transparent', textColor = 'text-gray-800 hover:text-black', onClick, children } = props
+  const { bgColor = 'bg-transparent', textColor = 'hover:text-black', onClick, children } = props
   const style = {
     bg: bgColor,
     border: 'rounded',
@@ -24,7 +24,7 @@ const Input = (props) => {
     width,
     bg: 'bg-gray-200 focus:bg-white',
     border: 'rounded border border-gray-200 focus:border-gray-600',
-    text: 'text-gray-800 focus:text-black',
+    text: 'focus:text-black',
     shadow: 'shadow-inner',
     space: 'mx-2 px-4 py-2',
   }
@@ -49,8 +49,8 @@ const Select = (props) => {
     innerWidth: 'w-full',
     bg: 'bg-gray-200 focus:bg-white',
     border: 'rounded border border-gray-200 focus:border-gray-600',
-    text: 'text-gray-800 focus:text-black',
-    shadow: 'shadow-inner',
+    text: 'focus:text-black',
+    shadow: 'shadow hover:shadow-md',
     space: 'px-4 py-2 pr-8',
   }
 

@@ -35,7 +35,7 @@ const Badge = (props) => {
 }
 
 const Card = (props) => {
-  const { bgColor = 'bg-gray-200', textColor = 'text-gray-800 hover:text-black', children } = props
+  const { bgColor = 'bg-gray-200', textColor = 'hover:text-black', children } = props
   const style = {
     width: 'w-full',
     bg: bgColor,
