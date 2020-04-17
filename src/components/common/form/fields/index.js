@@ -2,9 +2,10 @@ const InputField = (props) => {
   const { label, input, value } = props
 
   return (
-    <p className="flex">
-      <span className="w-1/4 mr-4">{label}</span>
-      <span className="w-3/4">{input ?? value}</span>
+    <p className="flex w-full">
+      <span className="w-1/3">{label}</span>
+      <span className="mx-2">:</span>
+      <span className="w-full">{input ?? value}</span>
     </p>
   )
 }

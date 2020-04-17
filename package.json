@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "silicium",
-  "description": "Minimalistic SNMP web based toolkit",
+  "description": "Minimalistic web based SNMP toolkit",
   "version": "0.0.1",
   "author": "Lương Quang Mạnh <luongquangmanh85@gmail.com>",
   "license": "MIT",

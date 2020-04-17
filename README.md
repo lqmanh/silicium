@@ -1,3 +1,3 @@
 # Silicium | Si
 
-> Minimalistic SNMP web based toolkit
+> Minimalistic web based SNMP toolkit

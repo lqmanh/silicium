@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { DivisionTitle } from '../components/common/typography/titles'
+import { TabTitle } from '../components/common/typography/titles'
 import { Tab, TabBar } from '../components/layout'
 
 const Generator = () => {
-  const tabs = ['prometheus', 'icinga 2']
+  const tabs = ['Prometheus', 'Icinga 2']
   const [activeTab, setActiveTab] = useState(tabs[0])
 
   return (
@@ -11,7 +11,7 @@ const Generator = () => {
       <TabBar>
         {tabs.map((tab, i) => (
           <Tab active={tab === activeTab} onClick={() => setActiveTab(tab)} key={i}>
-            <DivisionTitle>{tab}</DivisionTitle>
+            <TabTitle>{tab}</TabTitle>
           </Tab>
         ))}
       </TabBar>
