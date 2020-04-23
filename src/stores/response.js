@@ -1,37 +1,37 @@
 import { action, computed, observable } from 'mobx'
 
-class ResponseStore {
+export default class ResponseStore {
   @observable statusCode = null
   @observable statusText = null
   @observable varbinds = []
   @observable snmpDelay = null // ms
   @observable timestamp = null
 
-  constructor(rootStore) {
-    this.rootStore = rootStore
-  }
+  constructor() {}
 
   @computed
   get json() {
-    const { statusCode, statusText, varbinds, snmpDelay, timestamp } = this
-    return {
-      statusCode,
-      statusText,
-      varbinds: varbinds.map((varbind) => varbind.json),
-      snmpDelay,
-      timestamp,
-    }
+    const { statusCode, statusText, snmpDelay, timestamp } = this
+    const varbinds = this.varbinds.map((varbind) => varbind.json)
+    return { statusCode, statusText, varbinds, snmpDelay, timestamp }
+  }
+
+  @action
+  fromJson(json) {
+    Object.assign(this, json)
   }
 
   @action
   fromResponse(res) {
+    this.timestamp = new Date()
+
     const { status, statusText, data } = res
     this.statusCode = status
     this.statusText = statusText
 
     if (status !== 200 || !(data.varbinds instanceof Array)) return
 
-    this.varbinds = data.varbinds.map((varbindData) => new Varbind(varbindData))
+    this.varbinds = data.varbinds.map((varbindJson) => new Varbind(varbindJson))
     this.snmpDelay = data.snmpDelay
   }
 
@@ -45,7 +45,7 @@ class ResponseStore {
   }
 }
 
-class Varbind {
+export class Varbind {
   @observable numericOID = ''
   @observable textualOID = ''
   @observable fullOID = ''
@@ -67,5 +67,3 @@ class Varbind {
     Object.assign(this, json)
   }
 }
-
-export default ResponseStore

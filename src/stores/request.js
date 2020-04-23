@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { action, computed, observable } from 'mobx'
 
-class RequestStore {
+export default class RequestStore {
   @observable host = 'localhost' // hostname or IP address
   @observable port = 161
   @observable version = '2c' // 1, 2c or 3
@@ -10,8 +10,7 @@ class RequestStore {
   @observable method = 'GET' // GET or GETNEXT
   @observable timestamp = null
 
-  constructor(rootStore) {
-    this.rootStore = rootStore
+  constructor() {
     this.axios = axios.create({
       timeout: 10 * 1000,
       validateStatus: null, // always resolve HTTP response promises
@@ -25,15 +24,14 @@ class RequestStore {
   }
 
   @action
-  async submit() {
-    this.rootStore.responseStore.clear()
+  fromJson(json) {
+    Object.assign(this, json)
+  }
 
+  @action
+  async send() {
     this.timestamp = new Date()
-    const res = await this.axios.post('/api/snmp', this.json)
-    this.rootStore.responseStore.timestamp = new Date()
-
-    this.rootStore.responseStore.fromResponse(res)
-    this.rootStore.historyStore.append(this.json, this.rootStore.responseStore.json)
+    return this.axios.post('/api/snmp-client', this.json)
   }
 
   @action
@@ -47,5 +45,3 @@ class RequestStore {
     this.timestamp = null
   }
 }
-
-export default RequestStore

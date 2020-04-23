@@ -1,36 +1,75 @@
-import { action, computed, observable } from 'mobx'
+import axios from 'axios'
+import { action, computed, observable, runInAction } from 'mobx'
+import { Varbind } from './response'
 
 class HistoryStore {
   @observable entries = []
 
-  constructor(rootStore) {
-    this.rootStore = rootStore
-  }
-
-  @computed
-  get last() {
-    const n = this.entries.length
-    if (!n) return null
-    return this.entries[n - 1]
+  constructor() {
+    this.axios = axios.create({
+      timeout: 10 * 1000,
+      validateStatus: null, // always resolve HTTP response promises
+    })
   }
 
   @action
-  append(req, res) {
-    const entry = new HistoryEntry()
-    entry.request = req
-    entry.response = res
-    this.entries.push(entry)
+  async add(reqJson, resJson) {
+    await this.axios.post('/api/history', { request: reqJson, response: resJson })
+  }
+
+  @action
+  async fetch() {
+    const res = await this.axios.get('/api/history')
+
+    if (res.status !== 200 || !(res.data instanceof Array)) return
+
+    const entries = res.data.map((entryJson) => {
+      const { request, response } = entryJson
+      request.timestamp = new Date(request.timestamp)
+      response.timestamp = new Date(response.timestamp)
+      response.varbinds = response.varbinds.map((varbindJson) => new Varbind(varbindJson))
+      return new HistoryEntry(entryJson)
+    })
+    runInAction(() => {
+      this.entries = entries
+    })
+  }
+
+  @action
+  async delete(id) {
+    const res = await this.axios.delete(`/api/history?id=${id}`)
+
+    if (res.status !== 200 || !(res.data instanceof Array)) return
+
+    const entries = res.data.map((entryJson) => {
+      const { request, response } = entryJson
+      request.timestamp = new Date(request.timestamp)
+      response.timestamp = new Date(response.timestamp)
+      return new HistoryEntry(entryJson)
+    })
+    runInAction(() => {
+      this.entries = entries
+    })
   }
 }
 
 class HistoryEntry {
-  @observable request = null
-  @observable response = null
+  @observable id
+  @observable request
+  @observable response
+
+  constructor(json) {
+    this.fromJson(json)
+  }
 
   @computed
   get httpDelay() {
-    if (!this.request || !this.response) return null
     return this.response.timestamp - this.request.timestamp
+  }
+
+  @action
+  fromJson(json) {
+    Object.assign(this, json)
   }
 }
 

@@ -12,14 +12,17 @@ const RequestDivision = observer(() => {
   ]
   const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }]
 
-  const { requestStore: reqStore, responseStore: resStore } = useStores()
+  const { requestStore: reqStore, responseStore: resStore, historyStore } = useStores()
   const updateField = (event) => {
     const { name, value } = event.target
     reqStore[name] = value
   }
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
-    reqStore.submit()
+    resStore.clear()
+    const res = await reqStore.send()
+    resStore.fromResponse(res)
+    historyStore.add(reqStore.json, resStore.json)
   }
   const clear = (event) => {
     event.preventDefault()

@@ -5,7 +5,7 @@
     "jest": true,
     "node": true
   },
-  "extends": ["prettier", "prettier/react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {

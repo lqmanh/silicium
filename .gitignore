@@ -106,3 +106,6 @@ dist
 
 # Lock files
 *.lock
+
+# Private files
+service-account-key.json
