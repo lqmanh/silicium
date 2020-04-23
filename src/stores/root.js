@@ -4,9 +4,9 @@ import ResponseStore from './response'
 
 class RootStore {
   constructor() {
-    this.historyStore = new HistoryStore(this)
-    this.requestStore = new RequestStore(this)
-    this.responseStore = new ResponseStore(this)
+    this.historyStore = new HistoryStore()
+    this.requestStore = new RequestStore()
+    this.responseStore = new ResponseStore()
   }
 }
 

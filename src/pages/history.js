@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { observer } from 'mobx-react'
+import { useEffect, useState } from 'react'
 import { TabTitle } from '../components/common/typography/titles'
 import HistoryEntryCard from '../components/history-entry-card'
 import { Tab, TabBar } from '../components/layout'
+import { useStores } from '../hooks'
 
 const History = () => {
   const tabs = ['SNMP Client History', 'TRAP/INFORM Logs']
@@ -24,24 +26,22 @@ const History = () => {
   )
 }
 
-const SnmpClientHistory = () => {
+const SnmpClientHistory = observer(() => {
+  const { historyStore } = useStores()
+  useEffect(() => {
+    historyStore.fetch()
+  }, [])
+
   return (
     <div>
-      <div className="flex -mx-2 mb-6">
-        <HistoryEntryCard />
-      </div>
-      <div className="flex -mx-2 mb-6">
-        <HistoryEntryCard />
-      </div>
-      <div className="flex -mx-2 mb-6">
-        <HistoryEntryCard />
-      </div>
-      <div className="flex -mx-2 mb-6">
-        <HistoryEntryCard />
-      </div>
+      {historyStore.entries.map((entry, i) => (
+        <div className="flex -mx-2 mb-6" key={i}>
+          <HistoryEntryCard entry={entry} />
+        </div>
+      ))}
     </div>
   )
-}
+})
 
 const TrapLogs = () => null
 

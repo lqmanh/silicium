@@ -64,7 +64,7 @@ const Select = (props) => {
         onChange={onChange}
       >
         {options.map((opt, i) => (
-          <option key={i} value={opt.value}>
+          <option value={opt.value} key={i}>
             {opt.text || opt.value}
           </option>
         ))}

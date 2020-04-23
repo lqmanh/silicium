@@ -22,7 +22,7 @@ const RequestDivision = observer(() => {
     resStore.clear()
     const res = await reqStore.send()
     resStore.fromResponse(res)
-    historyStore.append(reqStore.json, resStore.json)
+    historyStore.add(reqStore.json, resStore.json)
   }
   const clear = (event) => {
     event.preventDefault()

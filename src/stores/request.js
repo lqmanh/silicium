@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { action, computed, observable } from 'mobx'
 
-class RequestStore {
+export default class RequestStore {
   @observable host = 'localhost' // hostname or IP address
   @observable port = 161
   @observable version = '2c' // 1, 2c or 3
@@ -10,8 +10,7 @@ class RequestStore {
   @observable method = 'GET' // GET or GETNEXT
   @observable timestamp = null
 
-  constructor(rootStore) {
-    this.rootStore = rootStore
+  constructor() {
     this.axios = axios.create({
       timeout: 10 * 1000,
       validateStatus: null, // always resolve HTTP response promises
@@ -22,6 +21,11 @@ class RequestStore {
   get json() {
     const { host, port, version, community, oid, method, timestamp } = this
     return { host, port, version, community, oid, method, timestamp }
+  }
+
+  @action
+  fromJson(json) {
+    Object.assign(this, json)
   }
 
   @action
@@ -41,5 +45,3 @@ class RequestStore {
     this.timestamp = null
   }
 }
-
-export default RequestStore
