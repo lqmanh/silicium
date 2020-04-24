@@ -6,7 +6,7 @@ import { Tab, TabBar } from '../components/layout'
 import { useStores } from '../hooks'
 
 const History = () => {
-  const tabs = ['SNMP Client History', 'TRAP/INFORM Logs']
+  const tabs = ['SNMP Client History', 'TRAP/INFORM Log']
   const [activeTab, setActiveTab] = useState(tabs[0])
 
   return (
@@ -20,7 +20,7 @@ const History = () => {
       </TabBar>
       <div className="flex-grow overflow-y-auto px-24 py-6">
         {activeTab === tabs[0] && <SnmpClientHistory />}
-        {activeTab === tabs[1] && <TrapLogs />}
+        {activeTab === tabs[1] && <TrapLog />}
       </div>
     </div>
   )
@@ -43,6 +43,6 @@ const SnmpClientHistory = observer(() => {
   )
 })
 
-const TrapLogs = () => null
+const TrapLog = () => null
 
 export default History

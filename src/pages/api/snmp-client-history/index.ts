@@ -1,22 +1,12 @@
-import admin from 'firebase-admin'
 import { NextApiRequest, NextApiResponse } from 'next'
-import serviceAccountKey from '../../../../service-account-key.json'
-
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccountKey as admin.ServiceAccount),
-    databaseURL: 'https://silicium-617ad.firebaseio.com',
-  })
-}
-const db = admin.firestore()
-const collection = db.collection('history')
+import { snmpClientHistory } from '../_firebase'
 
 const add = async (entry: object) => {
-  await collection.add(entry)
+  await snmpClientHistory.add(entry)
 }
 
 const get = async () => {
-  const snapshot = await collection.orderBy('request.timestamp', 'desc').get()
+  const snapshot = await snmpClientHistory.orderBy('request.timestamp', 'desc').get()
   const entries = snapshot.docs.map((doc) => {
     const id = doc.id
     const data = doc.data()
@@ -26,7 +16,7 @@ const get = async () => {
 }
 
 const deleteThenGet = async (id: string) => {
-  await collection.doc(id).delete()
+  await snmpClientHistory.doc(id).delete()
   return get()
 }
 
