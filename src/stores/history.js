@@ -14,22 +14,16 @@ class HistoryStore {
 
   @action
   async add(reqJson, resJson) {
-    await this.axios.post('/api/history', { request: reqJson, response: resJson })
+    await this.axios.post('/api/snmp-client-history', { request: reqJson, response: resJson })
   }
 
   @action
   async fetch() {
-    const res = await this.axios.get('/api/history')
+    const res = await this.axios.get('/api/snmp-client-history')
 
     if (res.status !== 200 || !(res.data instanceof Array)) return
 
-    const entries = res.data.map((entryJson) => {
-      const { request, response } = entryJson
-      request.timestamp = new Date(request.timestamp)
-      response.timestamp = new Date(response.timestamp)
-      response.varbinds = response.varbinds.map((varbindJson) => new Varbind(varbindJson))
-      return new HistoryEntry(entryJson)
-    })
+    const entries = res.data.map((entryJson) => new HistoryEntry(entryJson))
     runInAction(() => {
       this.entries = entries
     })
@@ -37,16 +31,11 @@ class HistoryStore {
 
   @action
   async delete(id) {
-    const res = await this.axios.delete(`/api/history?id=${id}`)
+    const res = await this.axios.delete(`/api/snmp-client-history?id=${id}`)
 
     if (res.status !== 200 || !(res.data instanceof Array)) return
 
-    const entries = res.data.map((entryJson) => {
-      const { request, response } = entryJson
-      request.timestamp = new Date(request.timestamp)
-      response.timestamp = new Date(response.timestamp)
-      return new HistoryEntry(entryJson)
-    })
+    const entries = res.data.map((entryJson) => new HistoryEntry(entryJson))
     runInAction(() => {
       this.entries = entries
     })
@@ -69,6 +58,10 @@ class HistoryEntry {
 
   @action
   fromJson(json) {
+    const { request, response } = json
+    request.timestamp = new Date(request.timestamp)
+    response.timestamp = new Date(response.timestamp)
+    response.varbinds = response.varbinds.map((varbindJson) => new Varbind(varbindJson))
     Object.assign(this, json)
   }
 }

@@ -13,7 +13,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@lqmanh/boracium": "^1.1.0",
+    "@lqmanh/boracium": "^1.2.0",
     "axios": "^0.19.2",
     "firebase-admin": "^8.10.0",
     "mobx": "^5.15.4",
