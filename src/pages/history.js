@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import { useEffect, useState } from 'react'
 import { TabTitle } from '../components/common/typography/titles'
-import { SnmpClientHistoryEntryCard } from '../components/history'
+import { SnmpClientHistoryEntryCard, TrapLogEntryCard } from '../components/history'
 import { Tab, TabBar } from '../components/layout'
 import { useStores } from '../hooks'
 
@@ -43,6 +43,21 @@ const SnmpClientHistory = observer(() => {
   )
 })
 
-const TrapLog = () => null
+const TrapLog = observer(() => {
+  const { trapLogStore } = useStores()
+  useEffect(() => {
+    trapLogStore.fetch()
+  }, [])
+
+  return (
+    <div>
+      {trapLogStore.entries.map((entry, i) => (
+        <div className="flex -mx-2 mb-6" key={i}>
+          <TrapLogEntryCard entry={entry} />
+        </div>
+      ))}
+    </div>
+  )
+})
 
 export default History

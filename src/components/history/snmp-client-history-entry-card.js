@@ -52,7 +52,7 @@ const Details = observer((props) => {
   return (
     <div className="grid grid-cols-2">
       <div className="col-auto border-r border-gray-400 mr-4 pr-4">
-        <h5 className="font-bold uppercase mb-2">request</h5>
+        <h5 className="font-bold uppercase">request</h5>
         <InputField label="Host" value={request.host} />
         <InputField label="Port" value={request.port} />
         <InputField label="SNMP version" value={request.version} />
@@ -61,7 +61,7 @@ const Details = observer((props) => {
         <InputField label="SNMP method" value={request.method} />
       </div>
       <div className="col-auto">
-        <h5 className="font-bold uppercase mb-2">response</h5>
+        <h5 className="font-bold uppercase">response</h5>
         <InputField label="HTTP status" value={`${response.statusCode} ${response.statusText}`} />
         <InputField label="SNMP delay" value={(response.snmpDelay ?? '-') + ' ms'} />
         <InputField label="Varbind(s)" value={response.varbinds.length} />
