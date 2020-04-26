@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import { useEffect, useState } from 'react'
 import { TabTitle } from '../components/common/typography/titles'
-import HistoryEntryCard from '../components/history-entry-card'
+import { SnmpClientHistoryEntryCard } from '../components/history'
 import { Tab, TabBar } from '../components/layout'
 import { useStores } from '../hooks'
 
@@ -36,7 +36,7 @@ const SnmpClientHistory = observer(() => {
     <div>
       {historyStore.entries.map((entry, i) => (
         <div className="flex -mx-2 mb-6" key={i}>
-          <HistoryEntryCard entry={entry} />
+          <SnmpClientHistoryEntryCard entry={entry} />
         </div>
       ))}
     </div>

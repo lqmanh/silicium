@@ -5,7 +5,8 @@ import { trapLog } from '../_firebase'
 const handler = new TrapHandler({ serverless: true })
 
 const add = async (message: RawTrapMessage) => {
-  await trapLog.add(await handler.parse(message))
+  const entry = await handler.parse(message)
+  await trapLog.add({ ...entry, timestamp: entry.timestamp.toISOString() })
 }
 
 const get = async () => {

@@ -1,4 +1,8 @@
-const Icon = (props) => {
+import { observer } from 'mobx-react'
+import { useState } from 'react'
+import { Button } from '../form/controls'
+
+export const Icon = (props) => {
   const { name, size = 16 } = props
 
   return (
@@ -8,7 +12,7 @@ const Icon = (props) => {
   )
 }
 
-const IconText = (props) => {
+export const IconText = (props) => {
   const { icon, text } = props
 
   return (
@@ -19,7 +23,7 @@ const IconText = (props) => {
   )
 }
 
-const Badge = (props) => {
+export const Badge = (props) => {
   const { bgColor = 'bg-gray-200', textColor = 'text-gray-600', children } = props
   const style = {
     appearance: 'inline-block',
@@ -34,7 +38,7 @@ const Badge = (props) => {
   )
 }
 
-const Card = (props) => {
+export const Card = (props) => {
   const { bgColor = 'bg-gray-200', textColor = 'hover:text-black', children } = props
   const style = {
     width: 'w-full',
@@ -52,4 +56,28 @@ const Card = (props) => {
   )
 }
 
-export { Icon, IconText, Badge, Card }
+export const EntryCard = observer((props) => {
+  const { title, actions, body } = props
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <Card>
+      <div className="flex flex-col">
+        <div className={`flex items-center justify-between ${expanded ? 'mb-4' : ''}`}>
+          <span>{title}</span>
+          <span>
+            <Button onClick={() => setExpanded(!expanded)}>
+              {expanded ? (
+                <IconText icon={<Icon name="chevron-up-outline" />} text="Shrink" />
+              ) : (
+                <IconText icon={<Icon name="chevron-down-outline" />} text="Expand" />
+              )}
+            </Button>
+            {actions}
+          </span>
+        </div>
+        {expanded && body}
+      </div>
+    </Card>
+  )
+})

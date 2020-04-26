@@ -25,8 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'GET') {
       return res.status(200).json(await get())
     } else if (req.method === 'POST') {
-      const { request, response } = req.body
-      await add({ request, response })
+      await add(req.body)
 
       return res.status(201).json({})
     } else if (req.method === 'DELETE') {
