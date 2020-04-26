@@ -23,7 +23,7 @@ export const SnmpClientHistoryEntryCard = observer((props) => {
     await router.push('/')
   }
   const loadButton = (
-    <Button onClick={load}>
+    <Button onClick={load} key="load-button">
       <IconText icon={<Icon name="cloud-upload-outline" />} text="Load" />
     </Button>
   )
@@ -32,7 +32,7 @@ export const SnmpClientHistoryEntryCard = observer((props) => {
     await historyStore.delete(id)
   }
   const removeButton = (
-    <Button bgColor="hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={remove}>
+    <Button bgColor="hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={remove} key="remove-button">
       <IconText icon={<Icon name="close" />} text="Remove" />
     </Button>
   )

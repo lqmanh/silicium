@@ -35,6 +35,17 @@ export default class TrapLogStore {
       this.entries = entries
     })
   }
+
+  @action
+  async clear() {
+    const res = await this.axios.delete('/api/trap-log')
+
+    if (res.status !== 200) return
+
+    runInAction(() => {
+      this.entries = []
+    })
+  }
 }
 
 class TrapLogEntry {

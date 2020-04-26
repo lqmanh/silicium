@@ -14,7 +14,7 @@ export const TrapLogEntryCard = observer((props) => {
     await trapLogStore.delete(id)
   }
   const removeButton = (
-    <Button bgColor="hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={remove}>
+    <Button bgColor="hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={remove} key="remove-button">
       <IconText icon={<Icon name="close" />} text="Remove" />
     </Button>
   )

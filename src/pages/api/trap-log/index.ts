@@ -24,6 +24,16 @@ const deleteThenGet = async (id: string) => {
   return get()
 }
 
+const clear = async () => {
+  const snapshot = await trapLog.get()
+  await Promise.all(
+    snapshot.docs.map(async (doc) => {
+      await doc.ref.delete()
+    })
+  )
+  return []
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === 'GET') {
@@ -34,8 +44,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(201).json({})
     } else if (req.method === 'DELETE') {
       const { id } = req.query
+      const entries = id ? await deleteThenGet(id as string) : await clear()
 
-      return res.status(200).json(await deleteThenGet(id as string))
+      return res.status(200).json(entries)
     } else return res.status(405).json({})
   } catch (err) {
     return res.status(500).json({ msg: err.message })

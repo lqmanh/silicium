@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import { TabTitle } from '../components/common/typography/titles'
+import { DivisionTitle, TabTitle } from '../components/common/typography/titles'
 import { Tab, TabBar } from '../components/layout'
 
 const Favorites = () => {
   const tabs = ['Favorites']
   const [activeTab, setActiveTab] = useState(tabs[0])
+  const title = <DivisionTitle>favorites</DivisionTitle>
 
   return (
     <div>
-      <TabBar>
+      <TabBar title={title} actions={[]}>
         {tabs.map((tab, i) => (
           <Tab active={tab === activeTab} onClick={() => setActiveTab(tab)} key={i}>
             <TabTitle>{tab}</TabTitle>

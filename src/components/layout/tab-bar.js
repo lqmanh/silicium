@@ -1,17 +1,24 @@
 const TabBar = (props) => {
-  const { children } = props
+  const { title, children, actions } = props
   const style = {
     appearance: 'flex items-center justify-center',
     width: 'w-full',
+    position: 'relative',
     bg: 'bg-transparent',
     text: '',
-    shadow: 'shadow',
-    space: 'p-4',
+    shadow: 'shadow-md',
+    space: 'px-6 py-2',
   }
 
   return (
-    <div className={`${style.appearance} ${style.width} ${style.bg} ${style.text} ${style.shadow} ${style.space}`}>
+    <div
+      className={`${style.appearance} ${style.width} ${style.position} ${style.bg} ${style.text} ${style.shadow} ${style.space}`}
+    >
+      <span className="absolute left-0 ml-6">{title}</span>
       <Tabs>{children}</Tabs>
+      <span className="absolute right-0 mr-6">
+        <span className="-mx-2">{actions}</span>
+      </span>
     </div>
   )
 }

@@ -40,6 +40,17 @@ class HistoryStore {
       this.entries = entries
     })
   }
+
+  @action
+  async clear() {
+    const res = await this.axios.delete('/api/snmp-client-history')
+
+    if (res.status !== 200) return
+
+    runInAction(() => {
+      this.entries = []
+    })
+  }
 }
 
 class HistoryEntry {
