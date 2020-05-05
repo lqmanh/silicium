@@ -7,7 +7,7 @@ const TabBar = (props) => {
     bg: 'bg-transparent',
     text: '',
     shadow: 'shadow-md',
-    space: 'px-6 py-2',
+    space: 'px-6 py-3',
   }
 
   return (

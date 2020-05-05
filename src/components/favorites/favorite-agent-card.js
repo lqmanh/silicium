@@ -3,14 +3,17 @@ import { useRouter } from 'next/router'
 import { useStores } from '../../hooks'
 import { EntryCard, Icon, IconText } from '../common/elements'
 import { Button } from '../common/form/controls'
+import { InputField } from '../common/form/fields'
 
 export const FavoriteAgentCard = observer((props) => {
   const { entry } = props
-  const { favoritesStore: favStore } = useStores()
+  const { requestStore: reqStore, favoritesStore: favStore } = useStores()
   const title = entry.name
   const router = useRouter()
   const load = async (event) => {
     event.preventDefault()
+    const { host, port, version, community } = entry
+    reqStore.fromJson({ host, port, version, community })
     await router.push('/')
   }
   const loadButton = (
@@ -20,6 +23,7 @@ export const FavoriteAgentCard = observer((props) => {
   )
   const remove = async (event) => {
     event.preventDefault()
+    await favStore.delete(entry.id)
   }
   const removeButton = (
     <Button bgColor="hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={remove} key="remove-button">
@@ -32,7 +36,13 @@ export const FavoriteAgentCard = observer((props) => {
 
 const Details = observer((props) => {
   const { entry } = props
-  console.log(entry)
 
-  return null
+  return (
+    <div>
+      <InputField label="Host" value={entry.host} />
+      <InputField label="Port" value={entry.port} />
+      <InputField label="SNMP version" value={entry.version} />
+      <InputField label="Community" value={entry.community} />
+    </div>
+  )
 })

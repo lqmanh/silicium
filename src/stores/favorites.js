@@ -26,6 +26,11 @@ export default class FavoritesStore {
   }
 
   @action
+  async update(id, snmpAgentJson) {
+    await this.axios.put(`/api/favorites?id=${id}`, snmpAgentJson)
+  }
+
+  @action
   async delete(id) {
     const res = await this.axios.delete(`/api/favorites?id=${id}`)
 
@@ -49,7 +54,7 @@ export default class FavoritesStore {
   }
 }
 
-class SnmpAgent {
+export class SnmpAgent {
   @observable id
   @observable name
   @observable host

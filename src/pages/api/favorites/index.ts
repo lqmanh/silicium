@@ -15,6 +15,10 @@ const get = async () => {
   return entries
 }
 
+const update = async (id: string, entry: object) => {
+  await favorites.doc(id).update(entry)
+}
+
 const deleteThenGet = async (id: string) => {
   await favorites.doc(id).delete()
   return get()
@@ -38,6 +42,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       await add(req.body)
 
       return res.status(201).json({})
+    } else if (req.method === 'PUT') {
+      await update(req.query.id as string, req.body)
+
+      return res.status(200).json({})
     } else if (req.method === 'DELETE') {
       const { id } = req.query
       const entries = id ? await deleteThenGet(id as string) : await clear()
