@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { action, observable } from 'mobx'
+import { action, computed, observable, runInAction } from 'mobx'
 
 export default class FavoritesStore {
   axios = axios.create({
@@ -9,18 +9,43 @@ export default class FavoritesStore {
   @observable entries = []
 
   @action
-  async fetch() {
-    //
+  async add(snmpAgentJson) {
+    await this.axios.post('/api/favorites', snmpAgentJson)
   }
 
   @action
-  async delete() {
-    //
+  async fetch() {
+    const res = await this.axios.get('/api/favorites')
+
+    if (res.status !== 200 || !(res.data instanceof Array)) return
+
+    const entries = res.data.map((entryJson) => new SnmpAgent(entryJson))
+    runInAction(() => {
+      this.entries = entries
+    })
+  }
+
+  @action
+  async delete(id) {
+    const res = await this.axios.delete(`/api/favorites?id=${id}`)
+
+    if (res.status !== 200 || !(res.data instanceof Array)) return
+
+    const entries = res.data.map((entryJson) => new SnmpAgent(entryJson))
+    runInAction(() => {
+      this.entries = entries
+    })
   }
 
   @action
   async clear() {
-    //
+    const res = await this.axios.delete('/api/favorites')
+
+    if (res.status !== 200) return
+
+    runInAction(() => {
+      this.entries = []
+    })
   }
 }
 
@@ -34,6 +59,12 @@ class SnmpAgent {
 
   constructor(json) {
     this.fromJson(json)
+  }
+
+  @computed
+  get json() {
+    const { name, host, port, version, community } = this
+    return { name, host, port, version, community }
   }
 
   @action

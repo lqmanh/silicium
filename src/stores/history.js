@@ -3,14 +3,11 @@ import { action, computed, observable, runInAction } from 'mobx'
 import { Varbind } from './response'
 
 class HistoryStore {
+  axios = axios.create({
+    timeout: 10 * 1000,
+    validateStatus: null, // always resolve HTTP response promises
+  })
   @observable entries = []
-
-  constructor() {
-    this.axios = axios.create({
-      timeout: 10 * 1000,
-      validateStatus: null, // always resolve HTTP response promises
-    })
-  }
 
   @action
   async add(reqJson, resJson) {
