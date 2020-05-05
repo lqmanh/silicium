@@ -11,3 +11,4 @@ const db = admin.firestore()
 
 export const snmpClientHistory = db.collection('snmp-client-history')
 export const trapLog = db.collection('trap-log')
+export const favorites = db.collection('favorites')

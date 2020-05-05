@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { observer } from 'mobx-react'
+import { useEffect, useState } from 'react'
 import { DivisionTitle, TabTitle } from '../components/common/typography/titles'
+import { FavoriteAgentCard } from '../components/favorites'
 import { Tab, TabBar } from '../components/layout'
+import { useStores } from '../hooks'
 
-const Favorites = () => {
+const Favorites = observer(() => {
   const tabs = ['Favorites']
   const [activeTab, setActiveTab] = useState(tabs[0])
   const title = <DivisionTitle>favorites</DivisionTitle>
@@ -16,8 +19,26 @@ const Favorites = () => {
           </Tab>
         ))}
       </TabBar>
+      <div className="flex-grow overflow-y-auto px-24 py-6">{activeTab === tabs[0] && <FavoriteAgents />}</div>
     </div>
   )
-}
+})
+
+const FavoriteAgents = observer(() => {
+  const { favoritesStore: favStore } = useStores()
+  useEffect(() => {
+    favStore.fetch()
+  }, [])
+
+  return (
+    <div>
+      {favStore.entries.map((entry, i) => (
+        <div className="flex -mx-2 mb-6" key={i}>
+          <FavoriteAgentCard entry={entry} />
+        </div>
+      ))}
+    </div>
+  )
+})
 
 export default Favorites

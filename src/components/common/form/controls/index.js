@@ -1,7 +1,7 @@
 import { Icon } from '../../elements'
 
 const Button = (props) => {
-  const { bgColor = 'bg-transparent', textColor = 'hover:text-black', onClick, children } = props
+  const { bgColor = 'bg-transparent', textColor = 'hover:text-black', type, onClick, children } = props
   const style = {
     bg: bgColor,
     border: 'rounded',
@@ -11,14 +11,18 @@ const Button = (props) => {
   }
 
   return (
-    <button className={`${style.bg} ${style.border} ${style.text} ${style.shadow} ${style.space}`} onClick={onClick}>
+    <button
+      className={`${style.bg} ${style.border} ${style.text} ${style.shadow} ${style.space}`}
+      type={type}
+      onClick={onClick}
+    >
       {children}
     </button>
   )
 }
 
 const Input = (props) => {
-  const { width = '', type, name, placeholder, defaultValue, value, onChange } = props
+  const { width = '', type, name, placeholder, defaultValue, value, onChange, required } = props
   const style = {
     appearance: 'appearance-none outline-none',
     width,
@@ -38,6 +42,7 @@ const Input = (props) => {
       defaultValue={defaultValue}
       value={value}
       onChange={onChange}
+      required={required}
     />
   )
 }
