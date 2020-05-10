@@ -17,6 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (method === 'GET') varbinds = await client.get(oid)
     else if (method === 'GETNEXT') varbinds = await client.getNext(oid)
     else if (method === 'GETBULK') varbinds = await client.getBulk(oid)
+    else if (method === 'WALK') varbinds = await client.walk()
     else return res.status(400).json({ msg: 'SNMP_METHOD_UNKNOWN' })
     const end = Date.now()
 
