@@ -1,9 +1,13 @@
+import Head from 'next/head'
 import { MibBrowserDivision } from '../components/divisions/mib-browser'
 import { RequestDivision } from '../components/divisions/request'
 import { ResponseDivision } from '../components/divisions/response'
 
 const Index = () => (
   <div className="grid grid-cols-3 h-full">
+    <Head>
+      <title>Dashboard | Silicium</title>
+    </Head>
     <div className="col-span-1 border-r border-gray-400 px-6 py-4">
       <MibBrowserDivision />
     </div>

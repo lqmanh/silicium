@@ -48,11 +48,11 @@ const RequestDivision = observer(() => {
             <DivisionTitle>request</DivisionTitle>
           </span>
           <span>
-            <Button bgColor="bg-transparent hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={clear}>
-              <IconText icon={<Icon name="trash-outline" />} text="Clear" />
-            </Button>
             <Button onClick={saveToFavorites}>
               <IconText icon={<Icon name="star-outline" />} text="Save to Favorites" />
+            </Button>
+            <Button bgColor="bg-transparent hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={clear}>
+              <IconText icon={<Icon name="trash-outline" />} text="Clear" />
             </Button>
           </span>
         </div>

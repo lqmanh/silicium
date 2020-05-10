@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { DivisionTitle, TabTitle } from '../components/common/typography/titles'
 import { FavoriteAgentCard } from '../components/favorites'
@@ -6,12 +7,15 @@ import { Tab, TabBar } from '../components/layout'
 import { useStores } from '../hooks'
 
 const Favorites = observer(() => {
-  const tabs = ['Favorites']
+  const tabs = ['Favorite Agents']
   const [activeTab, setActiveTab] = useState(tabs[0])
   const title = <DivisionTitle>favorites</DivisionTitle>
 
   return (
     <div>
+      <Head>
+        <title>Favorites | Silicium</title>
+      </Head>
       <TabBar title={title} actions={[]}>
         {tabs.map((tab, i) => (
           <Tab active={tab === activeTab} onClick={() => setActiveTab(tab)} key={i}>

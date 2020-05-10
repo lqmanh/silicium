@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react'
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { Icon, IconText } from '../components/common/elements'
 import { Button } from '../components/common/form/controls'
@@ -25,6 +26,9 @@ const History = () => {
 
   return (
     <div className="flex flex-col h-screen">
+      <Head>
+        <title>History | Silicium</title>
+      </Head>
       <TabBar title={title} actions={[clearButton]}>
         {tabs.map((tab, i) => (
           <Tab active={tab === activeTab} onClick={() => setActiveTab(tab)} key={i}>
