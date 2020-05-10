@@ -7,7 +7,7 @@ export default class RequestStore {
   @observable version = '2c' // 1, 2c or 3
   @observable community = 'public'
   @observable oid = ''
-  @observable method = 'GET' // GET or GETNEXT
+  @observable method = 'GET' // GET, GETNEXT, GETBULK or WALK
   @observable timestamp = null
 
   constructor() {
@@ -31,6 +31,12 @@ export default class RequestStore {
   @action
   async send() {
     this.timestamp = new Date()
+    return this.axios.post('/api/snmp-client', this.json)
+  }
+
+  @action
+  async loadMibTree() {
+    this.method = 'WALK'
     return this.axios.post('/api/snmp-client', this.json)
   }
 
