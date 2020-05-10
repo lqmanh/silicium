@@ -81,3 +81,16 @@ export const EntryCard = observer((props) => {
     </Card>
   )
 })
+
+export const ListEntry = observer((props) => {
+  const { children } = props
+  const style = {
+    bg: 'hover:bg-gray-200',
+    border: 'rounded',
+    text: 'hover:text-black',
+    cursor: 'cursor-pointer',
+    space: 'px-4 py-2',
+  }
+
+  return <div className={`${style.bg} ${style.border} ${style.text} ${style.cursor} ${style.space}`}>{children}</div>
+})

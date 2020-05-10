@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 import { useStores } from '../../../hooks'
 import { SnmpAgent } from '../../../stores'
-import { Icon, IconText } from '../../common/elements'
+import { Icon, IconText, ListEntry } from '../../common/elements'
 import { Button, Input } from '../../common/form/controls'
 
 export const FavoritesModal = observer((props) => {
@@ -93,22 +93,12 @@ const Entry = observer((props) => {
     onClick(event)
   }
 
-  const style = {
-    appearance: 'flex items-center justify-between',
-    bg: 'hover:bg-gray-200',
-    border: 'rounded',
-    text: 'hover:text-black',
-    cursor: 'cursor-pointer',
-    space: 'px-4 py-2',
-  }
-
   return (
-    <div
-      className={`${style.appearance} ${style.bg} ${style.border} ${style.text} ${style.cursor} ${style.space}`}
-      onClick={load}
-    >
-      <span>{name}</span>
-      <span className="text-opacity-75">{host}</span>
-    </div>
+    <ListEntry>
+      <div className="flex items-center justify-between" onClick={load}>
+        <span>{name}</span>
+        <span className="text-opacity-75">{host}</span>
+      </div>
+    </ListEntry>
   )
 })
