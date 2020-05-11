@@ -12,7 +12,7 @@ const RequestDivision = observer(() => {
     { value: '2c', text: 'SNMP v2c' },
     { value: '3', text: 'SNMP v3' },
   ]
-  const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }]
+  const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }, { value: 'WALK' }]
 
   const { requestStore: reqStore, responseStore: resStore, historyStore } = useStores()
   const [isModalOpen, setModalOpen] = useState(false)
