@@ -79,7 +79,12 @@ const RequestDivision = observer(() => {
             onChange={updateField}
           />
           <Select width="w-1/4" name="method" value={reqStore.method} onChange={updateField} options={methods} />
-          <Button bgColor="bg-blue-600" textColor="text-gray-200 hover:text-white" onClick={submit}>
+          <Button
+            bgColor="bg-blue-600"
+            textColor="text-gray-200 hover:text-white"
+            onClick={submit}
+            disabled={reqStore.method === 'WALK'}
+          >
             <IconText icon={<Icon name="send-outline" />} text="Send" />
           </Button>
         </div>

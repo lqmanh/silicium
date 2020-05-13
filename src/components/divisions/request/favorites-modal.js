@@ -97,7 +97,7 @@ const Entry = observer((props) => {
     <ListEntry>
       <div className="flex items-center justify-between" onClick={load}>
         <span>{name}</span>
-        <span className="text-gray-700">{host}</span>
+        <span className="opacity-75">{host}</span>
       </div>
     </ListEntry>
   )
