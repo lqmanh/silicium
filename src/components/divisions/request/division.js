@@ -4,7 +4,7 @@ import { useStores } from '../../../hooks'
 import { Icon, IconText } from '../../common/elements/index'
 import { Button, Input, Select } from '../../common/form/controls'
 import { DivisionTitle } from '../../common/typography/titles'
-import { FavoritesModal } from './favorites-modal'
+import { LfFModal, StFModal } from './favorites-modal'
 
 const RequestDivision = observer(() => {
   const versions = [
@@ -15,7 +15,7 @@ const RequestDivision = observer(() => {
   const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }, { value: 'WALK' }]
 
   const { requestStore: reqStore, responseStore: resStore, historyStore } = useStores()
-  const [isModalOpen, setModalOpen] = useState(false)
+  const [isModalOpen, setModalOpen] = useState('')
   const updateField = (event) => {
     const { name, value } = event.target
     reqStore[name] = value
@@ -34,10 +34,14 @@ const RequestDivision = observer(() => {
   }
   const saveToFavorites = (event) => {
     event.preventDefault()
-    setModalOpen(true)
+    setModalOpen('save')
+  }
+  const loadFromFavorites = (event) => {
+    event.preventDefault()
+    setModalOpen('load')
   }
   const closeModal = () => {
-    setModalOpen(false)
+    setModalOpen('')
   }
 
   return (
@@ -48,8 +52,11 @@ const RequestDivision = observer(() => {
             <DivisionTitle>request</DivisionTitle>
           </span>
           <span>
+            <Button onClick={loadFromFavorites}>
+              <IconText icon={<Icon name="cloud-upload-outline" />} text="Load" />
+            </Button>
             <Button onClick={saveToFavorites}>
-              <IconText icon={<Icon name="star-outline" />} text="Save to Favorites" />
+              <IconText icon={<Icon name="star-outline" />} text="Save" />
             </Button>
             <Button bgColor="bg-transparent hover:bg-red-600" textColor="text-red-600 hover:text-white" onClick={clear}>
               <IconText icon={<Icon name="trash-outline" />} text="Clear" />
@@ -79,12 +86,18 @@ const RequestDivision = observer(() => {
             onChange={updateField}
           />
           <Select width="w-1/4" name="method" value={reqStore.method} onChange={updateField} options={methods} />
-          <Button bgColor="bg-blue-600" textColor="text-gray-200 hover:text-white" onClick={submit}>
+          <Button
+            bgColor="bg-blue-600"
+            textColor="text-gray-200 hover:text-white"
+            onClick={submit}
+            disabled={reqStore.method === 'WALK'}
+          >
             <IconText icon={<Icon name="send-outline" />} text="Send" />
           </Button>
         </div>
       </form>
-      <FavoritesModal isOpen={isModalOpen} onRequestClose={closeModal} />
+      <LfFModal isOpen={isModalOpen === 'load'} onRequestClose={closeModal} />
+      <StFModal isOpen={isModalOpen === 'save'} onRequestClose={closeModal} />
     </section>
   )
 })
