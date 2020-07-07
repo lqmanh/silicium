@@ -61,6 +61,7 @@ export class SnmpAgent {
   @observable port
   @observable version
   @observable community
+  @observable user
 
   constructor(json) {
     this.fromJson(json)
@@ -68,8 +69,8 @@ export class SnmpAgent {
 
   @computed
   get json() {
-    const { name, host, port, version, community } = this
-    return { name, host, port, version, community }
+    const { name, host, port, version, community, user } = this
+    return { name, host, port, version, community, user }
   }
 
   @action

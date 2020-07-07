@@ -30,15 +30,15 @@ export const StFModal = observer((props) => {
       return
     }
 
-    const { host, port, version, community } = reqStore.json
+    const { host, port, version, community, user } = reqStore.json
     let agent = favStore.entries.find((entry) => {
       return entry.name === trimmedEntryName
     })
     if (!agent) {
-      agent = new SnmpAgent({ name: trimmedEntryName, host, port, version, community })
+      agent = new SnmpAgent({ name: trimmedEntryName, host, port, version, community, user })
       await favStore.add(agent.json)
     } else {
-      agent.fromJson({ host, port, version, community })
+      agent.fromJson({ host, port, version, community, user })
       await favStore.update(agent.id, agent.json)
     }
 

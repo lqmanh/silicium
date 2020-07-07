@@ -6,6 +6,7 @@ export default class RequestStore {
   @observable port = 161
   @observable version = '2c' // 1, 2c or 3
   @observable community = 'public'
+  @observable user = new User()
   @observable oid = ''
   @observable method = 'GET' // GET, GETNEXT, GETBULK or WALK
   @observable timestamp = null
@@ -19,13 +20,15 @@ export default class RequestStore {
 
   @computed
   get json() {
-    const { host, port, version, community, oid, method, timestamp } = this
-    return { host, port, version, community, oid, method, timestamp }
+    const { host, port, version, community, user, oid, method, timestamp } = this
+    return { host, port, version, community, user: user.json, oid, method, timestamp }
   }
 
   @action
   fromJson(json) {
-    Object.assign(this, json)
+    const user = new User()
+    user.fromJson(json.user)
+    Object.assign(this, { ...json, user })
   }
 
   @action
@@ -49,5 +52,24 @@ export default class RequestStore {
     this.oid = ''
     this.method = ''
     this.timestamp = null
+  }
+}
+
+export class User {
+  @observable username = ''
+  @observable authProtocol = 'MD5'
+  @observable authPassword = ''
+  @observable privProtocol = 'DES'
+  @observable privPassword = ''
+
+  @computed
+  get json() {
+    const { username, authProtocol, authPassword, privProtocol, privPassword } = this
+    return { username, authProtocol, authPassword, privProtocol, privPassword }
+  }
+
+  @action
+  fromJson(json) {
+    Object.assign(this, json)
   }
 }

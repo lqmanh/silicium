@@ -13,6 +13,15 @@ const RequestDivision = observer(() => {
     { value: '3', text: 'SNMP v3' },
   ]
   const methods = [{ value: 'GET' }, { value: 'GETNEXT' }, { value: 'GETBULK' }, { value: 'WALK' }]
+  const authProtocols = [
+    { value: 'MD5' },
+    { value: 'SHA' },
+    { value: 'SHA-512' },
+    { value: 'SHA-384' },
+    { value: 'SHA-256' },
+    { value: 'SHA-224' },
+  ]
+  const privProtocols = [{ value: 'DES' }, { value: 'AES' }]
 
   const { requestStore: reqStore, responseStore: resStore, historyStore } = useStores()
   const [isModalOpen, setModalOpen] = useState('')
@@ -69,14 +78,65 @@ const RequestDivision = observer(() => {
         </div>
         <div className="flex -mx-2 mb-4">
           <Select width="w-1/4" name="version" value={reqStore.version} onChange={updateField} options={versions} />
-          <Input
-            width="w-full"
-            name="community"
-            placeholder="Community"
-            value={reqStore.community}
-            onChange={updateField}
-          />
+          {reqStore.version === '3' ? (
+            <Input
+              width="w-full"
+              placeholder="Username"
+              value={reqStore.user.username}
+              onChange={(event) => {
+                reqStore.user.username = event.target.value
+              }}
+            />
+          ) : (
+            <Input
+              width="w-full"
+              name="community"
+              placeholder="Community"
+              value={reqStore.community}
+              onChange={updateField}
+            />
+          )}
         </div>
+        {reqStore.version === '3' ? (
+          <div className="flex -mx-2 mb-4">
+            <Select
+              width="w-1/4"
+              value={reqStore.user.authProtocol}
+              options={authProtocols}
+              onChange={(event) => {
+                reqStore.user.authProtocol = event.target.value
+              }}
+            />
+            <Input
+              width="w-full"
+              placeholder="Authentication password"
+              value={reqStore.user.authPassword}
+              onChange={(event) => {
+                reqStore.user.authPassword = event.target.value
+              }}
+            />
+          </div>
+        ) : null}
+        {reqStore.version === '3' ? (
+          <div className="flex -mx-2 mb-4">
+            <Select
+              width="w-1/4"
+              value={reqStore.user.privProtocol}
+              options={privProtocols}
+              onChange={(event) => {
+                reqStore.user.privProtocol = event.target.value
+              }}
+            />
+            <Input
+              width="w-full"
+              placeholder="Privacy password"
+              value={reqStore.user.privPassword}
+              onChange={(event) => {
+                reqStore.user.privPassword = event.target.value
+              }}
+            />
+          </div>
+        ) : null}
         <div className="flex -mx-2">
           <Input
             width="w-full"

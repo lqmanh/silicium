@@ -42,7 +42,11 @@ const Details = observer((props) => {
       <InputField label="Host" value={entry.host} />
       <InputField label="Port" value={entry.port} />
       <InputField label="SNMP version" value={entry.version} />
-      <InputField label="Community" value={entry.community} />
+      {entry.version === '3' ? (
+        <InputField label="Username" value={entry.user.username} />
+      ) : (
+        <InputField label="Community" value={entry.community} />
+      )}
     </div>
   )
 })
