@@ -21,7 +21,7 @@ export default class RequestStore {
   @computed
   get json() {
     const { host, port, version, community, user, oid, method, timestamp } = this
-    return { host, port, version, community, user: user.json, oid, method, timestamp }
+    return { host, port, version, community, user, oid, method, timestamp }
   }
 
   @action
@@ -61,6 +61,10 @@ export class User {
   @observable authPassword = ''
   @observable privProtocol = 'DES'
   @observable privPassword = ''
+
+  constructor(json) {
+    this.fromJson(json)
+  }
 
   @computed
   get json() {

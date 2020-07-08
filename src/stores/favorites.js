@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { action, computed, observable, runInAction } from 'mobx'
+import { User } from './request'
 
 export default class FavoritesStore {
   axios = axios.create({
@@ -70,11 +71,12 @@ export class SnmpAgent {
   @computed
   get json() {
     const { name, host, port, version, community, user } = this
-    return { name, host, port, version, community, user }
+    return { name, host, port, version, community, user: user.json }
   }
 
   @action
   fromJson(json) {
-    Object.assign(this, json)
+    const user = new User(json.user)
+    Object.assign(this, { ...json, user })
   }
 }

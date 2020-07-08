@@ -12,8 +12,7 @@ export const FavoriteAgentCard = observer((props) => {
   const router = useRouter()
   const load = async (event) => {
     event.preventDefault()
-    const { host, port, version, community } = entry
-    reqStore.fromJson({ host, port, version, community })
+    reqStore.fromJson(entry.json)
     await router.push('/')
   }
   const loadButton = (
